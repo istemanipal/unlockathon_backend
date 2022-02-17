@@ -93,8 +93,11 @@ def check_answer(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def skip(request):
-    user=get_user(request)
     context={}
+    user=get_user(request)
+    if user.skips <=0:
+        context['status']='insufficient skips'
+        return Response(context)
     try:
         user.current_question+=1
         user.skips-=1
