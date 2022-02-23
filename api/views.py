@@ -68,7 +68,7 @@ def check_answer(request):
     if answer.lower().replace(" ","") == Question.objects.get(question_number=user.current_question).answer.lower().replace(" ",""):
         try:
             user.current_question+=1
-            user.points+=1
+            user.points+=3
             context['points']=user.points
             user.save()
             context['status']='correct'
